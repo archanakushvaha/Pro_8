@@ -8,7 +8,7 @@ class Array_1D:
     
     def create1D(self):
         arr = []
-        for i in self.el.split(" "):
+        for i in self.el.split():
             i = int(i)
             arr.append(i)
         
@@ -26,7 +26,7 @@ class Array_2D:
     
     def create2D(self):
         arr = []
-        for i in self.el.split(" "):
+        for i in self.el.split():
             i = int(i)
             arr.append(i)
         
@@ -44,7 +44,7 @@ class Array_3D:
     
     def create3D(self):
         arr = []
-        for i in self.ele.split(" "):
+        for i in self.ele.split():
             i = int(i)
             arr.append(i)
         
@@ -63,7 +63,7 @@ def addition_Array():
         
     aa = []
         
-    for i in elements.split(" "):
+    for i in elements.split():
         i = int(i)
         aa.append(i)
         
@@ -97,7 +97,7 @@ def multiplication_array():
     
     aa = []
     
-    for i in elements.split(" "):
+    for i in elements.split():
         i = int(i)
         aa.append(i)
         
@@ -115,7 +115,7 @@ def divison_array():
     
     aa = []
     
-    for i in elements.split(" "):
+    for i in elements.split():
         i = int(i)
         aa.append(i)
         
@@ -132,7 +132,7 @@ def combine_array():
     
     aa = []
     
-    for i in elements.split(" "):
+    for i in elements.split():
         i = int(i)
         aa.append(i)
     
@@ -211,7 +211,7 @@ while True:
     print("5. Compute Aggreagtes and Statistics")
     print("6. Exit")
 
-    choice = input("\nEnter your choice : ")
+    choice = int(input("\nEnter your choice : "))
 
     if choice == 1:
 
@@ -222,7 +222,7 @@ while True:
             print("3. Create 3D Array")
             print("4. Back to Main Menu")
 
-            opition = input("\nEnter your choice : ")
+            opition = int(input("\nEnter your choice : "))
 
             if opition == 1:
                 elements = input("\nEnter elemetns for array seprated by space : ")
@@ -304,7 +304,7 @@ while True:
             print("2. Split Array")
             print("3. Back to Main Menu")
 
-            opition = input("\nEnter your choice : ")
+            opition = int(input("\nEnter your choice : "))
 
             if opition == 1:
 
@@ -330,7 +330,7 @@ while True:
             print("2. Sort Array in Ascending Order")
             print("3. Back to Main Menu")
 
-            opition = input("\nEnter your choice : ")
+            opition = int(input("\nEnter your choice : "))
 
             if opition == 1:
 
@@ -359,7 +359,7 @@ while True:
             print("5. Minimum of Array")
             print("6. Back to Main Menu")
 
-            opition = input("\nEnter your choice : ")
+            opition = int(input("\nEnter your choice : "))
 
             if opition == 1:
 
