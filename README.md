@@ -1,126 +1,164 @@
-# NumPy Array Analyzer
+NumPy Array Analyzer
 
-## 📌 Project Description
+📌 Project Description
 
-This project is a **NumPy Array Analyzer** created using Python and NumPy.
+NumPy Array Analyzer is a Python-based project used to create, analyze, and perform different operations on NumPy arrays.
 
-It allows users to create and analyze **1D, 2D, and 3D NumPy arrays**. The project provides different operations such as mathematical calculations, combining and splitting arrays, searching, sorting, and statistical calculations.
+This project provides a menu-driven program for working with 1D, 2D, and 3D arrays. It includes mathematical operations, indexing, slicing, searching, sorting, filtering, statistical analysis, dot product, and matrix multiplication.
 
-## 🎯 Features
+---
 
-The project includes the following features:
+🛠️ Technologies Used
 
-### 1. Create NumPy Arrays
+- Python
+- NumPy
 
-Users can create:
+---
 
-* 1D Array
-* 2D Array
-* 3D Array
+✨ Features
 
-For 2D and 3D arrays, the user can enter the required rows, columns, and depth.
+1. Array Creation
 
-### 2. Mathematical Operations
+- Create 1D Array
+- Create 2D Array
+- Create 3D Array
 
-The project supports:
+2. Mathematical Operations
 
-* Addition
-* Subtraction
-* Multiplication
-* Division
+- Addition
+- Subtraction
+- Multiplication
+- Division
 
-These operations are performed between NumPy arrays.
+3. Indexing and Slicing
 
-### 3. Combine and Split Arrays
+- Array Indexing
+- Array Slicing
 
-Users can:
+4. Combine and Split
 
-* Combine arrays using `np.vstack()`
-* Split arrays using `np.split()`
+- Combine Arrays
+- Split Arrays
 
-### 4. Search and Sort
+5. Search, Sort and Filter
 
-The project provides:
+- Search Array
+- Ascending Sort
+- Descending Sort
+- Filter Array
 
-* Search a value using `np.where()`
-* Sort an array using `np.sort()`
+6. Statistical Operations
 
-### 5. Statistics
+- Sum
+- Mean
+- Median
+- Minimum
+- Maximum
+- Standard Deviation
+- Variance
+- Percentile
+- Correlation Coefficient
 
-The following statistical operations are available:
+7. Mathematical Array Operations
 
-* Sum
-* Mean
-* Median
-* Maximum
-* Minimum
+- Dot Product
+- Matrix Multiplication
 
-## 🛠️ Technologies Used
+---
 
-* Python
-* NumPy
+🧑‍💻 OOP Concepts Used
 
-## 📦 Installation
+The project uses Object-Oriented Programming concepts through the "DataAnalytics" class.
 
-First, install NumPy:
+It includes:
 
-```bash
-pip install numpy
-```
+- Class
+- Object
+- Constructor
+- Encapsulation
+- Private Variable
+- Private Method
+- Class Method
+- Static Method
 
-## ▶️ How to Run
+---
 
-Run the Python file:
+📂 Project Structure
 
-```bash
-python pro_8.py
-```
-
-After running the program, the main menu will be displayed:
-
-```text
-Welcome to Array Analyzer
-
-1. Create a numpy array
-2. Perform Mathematical Operation
-3. Combine or Split Array
-4. Search, Sort, or Filter Arrays
-5. Compute Aggregates and Statistics
-6. Exit
-```
-
-## 📁 Project Structure
-
-```text
-NumPy-Array-Analyzer/
+Pro_8/
 │
 ├── pro_8.py
+│
 └── README.md
-```
 
-## 🧠 NumPy Concepts Used
+---
 
-This project demonstrates important NumPy concepts such as:
+📦 Installation
 
-* `np.array()`
-* `reshape()`
-* `np.vstack()`
-* `np.split()`
-* `np.where()`
-* `np.sort()`
-* `np.sum()`
-* `np.mean()`
-* `np.median()`
-* `np.max()`
-* `np.min()`
+First, make sure Python is installed on your computer.
 
-## 📊 Project Purpose
+Install NumPy using:
 
-The purpose of this project is to practice NumPy arrays and perform different array operations through a simple menu-driven Python program.
+pip install numpy
 
-Video link :
+---
 
+▶️ How to Run
 
-## ✅ Conclusion
+Open the project folder in VS Code or another Python editor.
 
-The **NumPy Array Analyzer** is a menu-driven project that provides different options to create, manipulate, search, sort, and analyze NumPy arrays. It is useful for practicing NumPy fundamentals and understanding how arrays can be handled using Python.
+Run:
+
+python pro_8.py
+
+The program will display a menu:
+
+1. Create a NumPy Array
+2. Mathematical Operations
+3. Indexing and Slicing
+4. Combine or Split Array
+5. Search, Sort and Filter
+6. Aggregates and Statistics
+7. Dot Product / Matrix Multiplication
+8. Show Current Array
+9. Exit
+
+Select the required option and follow the instructions shown on the screen.
+
+---
+
+📊 Example
+
+1D Array
+
+Input:
+
+10 20 30 40 50
+
+Output:
+
+[10 20 30 40 50]
+
+Statistics
+
+Sum: 150
+Mean: 30.0
+Median: 30.0
+Maximum: 50
+Minimum: 10
+
+---
+
+🎯 Objective
+
+The main objective of this project is to understand and practice NumPy arrays and their operations using Python.
+
+It also helps in understanding basic Object-Oriented Programming concepts while working with data analysis operations.
+
+---
+
+👩‍💻 Author
+
+Archana Kushvaha
+
+Python & NumPy Learning Project
