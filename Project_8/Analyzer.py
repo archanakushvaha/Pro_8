@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class DataAnalytics:
 
     def __init__(self):
@@ -12,14 +11,14 @@ class DataAnalytics:
             return False
         return True
 
+    @classmethod
     def create_analyzer(cls):
         return cls()
 
+    @staticmethod
     def display_title(title):
-        print("\n" + "=" * 40)
         print(title)
-        print("=" * 40)
-
+        
     def create_1d(self, elements):
 
         arr = []
@@ -33,6 +32,10 @@ class DataAnalytics:
         print(self.__array)
 
     def create_2d(self, elements, rows, columns):
+
+        if rows <= 0 or columns <= 0:
+            print("\nRows and columns must be greater than 0.")
+            return
 
         arr = []
 
@@ -49,6 +52,10 @@ class DataAnalytics:
         print(self.__array)
 
     def create_3d(self, elements, depth, rows, columns):
+
+        if depth <= 0 or rows <= 0 or columns <= 0:
+            print("\nDimensions must be greater than 0.")
+            return
 
         arr = []
 
@@ -78,7 +85,7 @@ class DataAnalytics:
             print("\nElement:")
             print(self.__array[index])
 
-        except:
+        except (ValueError, IndexError):
             print("\nInvalid index.")
 
     def slicing(self):
@@ -96,7 +103,7 @@ class DataAnalytics:
             print("\nSliced Array:")
             print(self.__array[start:end])
 
-        except:
+        except ValueError:
             print("\nInvalid index.")
 
     def get_second_array(self):
@@ -106,13 +113,17 @@ class DataAnalytics:
 
         size = self.__array.size
         shape = self.__array.shape
-
         elements = input(f"\nEnter {size} elements separated by space: ")
 
-        arr = []
+        try:
+            arr = []
 
-        for i in elements.split():
-            arr.append(int(i))
+            for i in elements.split():
+                arr.append(int(i))
+
+        except ValueError:
+            print("\nPlease enter numbers only.")
+            return None
 
         if len(arr) != size:
             print("\nInvalid number of elements.")
@@ -120,16 +131,12 @@ class DataAnalytics:
 
         return np.array(arr).reshape(shape)
 
-
     def addition_array(self):
 
         second_array = self.get_second_array()
-
         if second_array is not None:
-
             print("\nAddition:")
             print(self.__array + second_array)
-
 
     def subtraction_array(self):
 
@@ -140,7 +147,6 @@ class DataAnalytics:
             print("\nSubtraction:")
             print(self.__array - second_array)
 
-
     def multiplication_array(self):
 
         second_array = self.get_second_array()
@@ -150,13 +156,10 @@ class DataAnalytics:
             print("\nMultiplication:")
             print(self.__array * second_array)
 
-
     def division_array(self):
 
         second_array = self.get_second_array()
-
         if second_array is not None:
-
             if np.any(second_array == 0):
                 print("\nDivision by zero is not allowed.")
                 return
@@ -170,14 +173,11 @@ class DataAnalytics:
             return
 
         second_array = self.get_second_array()
-
         if second_array is None:
             return
 
         try:
-
             result = np.concatenate((self.__array, second_array),axis=0)
-
             print("\nOriginal Array:")
             print(self.__array)
 
@@ -197,26 +197,21 @@ class DataAnalytics:
             return
 
         try:
-
             parts = int(input("\nEnter number of parts: "))
 
             if parts <= 0:
                 print("\nInvalid number of parts.")
                 return
 
-            result = np.array_split(self.__array,parts)
-
+            result = np.array_split(self.__array, parts)
             print("\nSplit Arrays:")
 
             for i, part in enumerate(result, 1):
-
                 print(f"\nPart {i}:")
                 print(part)
 
-        except:
-
-            print("\nArray cannot be split.")
-
+        except ValueError:
+            print("\nPlease enter a valid number.")
 
     def search_array(self):
 
@@ -224,56 +219,45 @@ class DataAnalytics:
             return
 
         try:
-
             value = int(input("\nEnter value to search: "))
-
             index = np.where(self.__array == value)
 
             if len(index[0]) == 0:
-
                 print("\nValue not found.")
 
             else:
-
                 print("\nValue found at:")
                 print(index)
 
-        except:
+        except ValueError:
 
             print("\nInvalid value.")
-
 
     def sort_ascending(self):
 
         if not self.__check_array():
             return
 
-        result = np.sort(self.__array,axis=None)
-
+        result = np.sort(self.__array, axis=None)
         print("\nAscending Order:")
         print(result)
-
 
     def sort_descending(self):
 
         if not self.__check_array():
             return
 
-        result = np.sort(self.__array,axis=None)[::-1]
-
+        result = np.sort(self.__array, axis=None)[::-1]
         print("\nDescending Order:")
         print(result)
-
 
     def filter_array(self):
 
         if not self.__check_array():
             return
-
+        
         try:
-
             value = int(input("\nEnter value: "))
-
             print("\n1. Greater than")
             print("2. Less than")
             print("3. Equal to")
@@ -281,78 +265,58 @@ class DataAnalytics:
             choice = int(input("\nEnter your choice: "))
 
             if choice == 1:
-
                 result = self.__array[self.__array > value]
 
             elif choice == 2:
-
                 result = self.__array[self.__array < value]
 
             elif choice == 3:
-
                 result = self.__array[self.__array == value]
 
             else:
-
                 print("\nInvalid choice.")
                 return
-
+            
             print("\nFiltered Array:")
             print(result)
 
-        except:
-
+        except ValueError:
             print("\nInvalid input.")
-
 
     def sum_array(self):
 
         if self.__check_array():
-
-            print("\nSum:",np.sum(self.__array))
-
+            print("\nSum:", np.sum(self.__array))
 
     def mean_array(self):
 
         if self.__check_array():
-
-            print("\nMean:",np.mean(self.__array))
-
+            print("\nMean:", np.mean(self.__array))
 
     def median_array(self):
 
         if self.__check_array():
-
-            print("\nMedian:",np.median(self.__array))
-
+            print("\nMedian:", np.median(self.__array))
 
     def maximum_array(self):
 
         if self.__check_array():
-
-            print("\nMaximum:",np.max(self.__array))
-
+            print("\nMaximum:", np.max(self.__array))
 
     def minimum_array(self):
 
         if self.__check_array():
-
-            print("\nMinimum:",np.min(self.__array))
-
+            print("\nMinimum:", np.min(self.__array))
 
     def standard_deviation(self):
 
         if self.__check_array():
-
-            print("\nStandard Deviation:",np.std(self.__array))
-
+            print("\nStandard Deviation:", np.std(self.__array))
 
     def variance(self):
 
         if self.__check_array():
-
-            print("\nVariance:",np.var(self.__array))
-
+            print("\nVariance:", np.var(self.__array))
 
     def percentile(self):
 
@@ -360,22 +324,18 @@ class DataAnalytics:
             return
 
         try:
-
             value = float(input("\nEnter percentile (0-100): "))
 
             if value < 0 or value > 100:
-
                 print("\nPercentile must be between 0 and 100.")
                 return
 
-            result = np.percentile(self.__array,value)
+            result = np.percentile(self.__array, value)
+            print(f"\n{value}th Percentile:", result)
 
-            print(f"\n{value}th Percentile:",result)
-
-        except:
+        except ValueError:
 
             print("\nInvalid percentile.")
-
 
     def correlation(self):
 
@@ -383,13 +343,10 @@ class DataAnalytics:
             return
 
         if self.__array.ndim != 1:
-
             print("\nCorrelation requires a 1D array.")
-
             return
 
         try:
-
             elements = input("\nEnter elements for second array: ")
 
             arr = []
@@ -402,14 +359,13 @@ class DataAnalytics:
             if len(self.__array) != len(second_array):
 
                 print("\nBoth arrays must have same size.")
-
                 return
 
             result = np.corrcoef(self.__array,second_array)[0, 1]
 
-            print("\nCorrelation Coefficient:",result)
+            print("\nCorrelation Coefficient:", result)
 
-        except:
+        except ValueError:
 
             print("\nInvalid input.")
 
@@ -419,15 +375,11 @@ class DataAnalytics:
             return
 
         if self.__array.ndim != 1:
-
             print("\nDot product requires a 1D array.")
-
             return
 
         try:
-
             elements = input("\nEnter elements for second 1D array: ")
-
             arr = []
 
             for i in elements.split():
@@ -436,17 +388,13 @@ class DataAnalytics:
             second_array = np.array(arr)
 
             if len(self.__array) != len(second_array):
-
                 print("\nBoth arrays must have same size.")
-
                 return
 
             result = np.dot(self.__array,second_array)
+            print("\nDot Product:", result)
 
-            print("\nDot Product:",result)
-
-        except:
-
+        except ValueError:
             print("\nInvalid input.")
 
     def matrix_multiplication(self):
@@ -455,27 +403,24 @@ class DataAnalytics:
             return
 
         if self.__array.ndim != 2:
-
             print("\nMatrix multiplication requires a 2D array.")
-
             return
 
         try:
-
             rows = int(input("\nEnter rows of second matrix: "))
-
             columns = int(input("Enter columns of second matrix: "))
+
+            if rows <= 0 or columns <= 0:
+                print("\nRows and columns must be greater than 0.")
+                return
 
             if self.__array.shape[1] != rows:
 
                 print("\nMatrix multiplication is not possible.")
-
                 print("Columns of first matrix must equal rows of second matrix.")
-
                 return
 
             elements = input(f"\nEnter {rows * columns} elements: ")
-
             arr = []
 
             for i in elements.split():
@@ -484,11 +429,9 @@ class DataAnalytics:
             if len(arr) != rows * columns:
 
                 print("\nInvalid number of elements.")
-
                 return
 
-            second_array = np.array(arr).reshape(rows, columns)
-
+            second_array = np.array(arr).reshape(rows,columns)
             result = np.matmul(self.__array,second_array)
 
             print("\nSecond Matrix:")
@@ -497,7 +440,7 @@ class DataAnalytics:
             print("\nMatrix Multiplication:")
             print(result)
 
-        except:
+        except ValueError:
 
             print("\nInvalid input.")
 
@@ -508,372 +451,312 @@ class DataAnalytics:
             print("\nCurrent Array:")
             print(self.__array)
 
-# MAIN PROGRAM
 
-analyzer = DataAnalytics.create_analyzer()
+def main():
 
+    analyzer = DataAnalytics.create_analyzer()
 
-while True:
+    while True:
 
-    print("\n")
-    print("       WELCOME TO ARRAY ANALYZER")
-  
-    print("1. Create a NumPy Array")
-    print("2. Mathematical Operations")
-    print("3. Indexing and Slicing")
-    print("4. Combine or Split Array")
-    print("5. Search, Sort and Filter")
-    print("6. Aggregates and Statistics")
-    print("7. Dot Product / Matrix Multiplication")
-    print("8. Show Current Array")
-    print("9. Exit")
+        print("\n")
+        print("WELCOME TO ARRAY ANALYZER")
+        print("1. Create a NumPy Array")
+        print("2. Mathematical Operations")
+        print("3. Indexing and Slicing")
+        print("4. Combine or Split Array")
+        print("5. Search, Sort and Filter")
+        print("6. Aggregates and Statistics")
+        print("7. Dot Product / Matrix Multiplication")
+        print("8. Show Current Array")
+        print("9. Exit")
 
-    try:
+        try:
+            choice = int(input("\nEnter your choice: "))
 
-        choice = int(input("\nEnter your choice: "))
+        except ValueError:
 
-    except:
+            print("\nPlease enter a number.")
+            continue
 
-        print("\nPlease enter a number.")
-        continue
+        if choice == 1:
 
-    if choice == 1:
+            while True:
 
-        while True:
-
-            print("\n1. Create 1D Array")
-            print("2. Create 2D Array")
-            print("3. Create 3D Array")
-            print("4. Back to Main Menu")
-
-            try:
-
-                option = int(input("\nEnter your choice: "))
-
-            except:
-
-                print("\nPlease enter a number.")
-                continue
-
-            if option == 1:
-
-                elements = input("\nEnter elements separated by space: ")
+                print("\n1. Create 1D Array")
+                print("2. Create 2D Array")
+                print("3. Create 3D Array")
+                print("4. Back to Main Menu")
 
                 try:
+                    option = int(input("\nEnter your choice: "))
 
-                    analyzer.create_1d(elements)
+                except ValueError:
 
-                except:
+                    print("\nPlease enter a number.")
+                    continue
 
-                    print("\nPlease enter numbers only.")
+                if option == 1:
+                    elements = input("\nEnter elements separated by space: ")
 
-            elif option == 2:
+                    try:
+                        analyzer.create_1d(elements)
+
+                    except ValueError:
+                        print("\nPlease enter numbers only.")
+
+                elif option == 2:
+
+                    try:
+
+                        rows = int(input("\nEnter number of rows: "))
+                        columns = int(input("Enter number of columns: "))
+                        elements = input(f"\nEnter {rows * columns} elements: ")
+                        analyzer.create_2d(elements,rows,columns)
+
+                    except ValueError:
+                        print("\nInvalid input.")
+
+                elif option == 3:
+
+                    try:
+
+                        depth = int(input("\nEnter depth: "))
+                        rows = int(input("Enter rows: "))
+                        columns = int(input("Enter columns: "))
+                        elements = input(f"\nEnter {depth * rows * columns} elements: ")
+                        analyzer.create_3d(elements,depth,rows,columns)
+
+                    except ValueError:
+                        print("\nInvalid input.")
+
+                elif option == 4:
+                    break
+
+                else:
+                    print("\nInvalid choice.")
+
+        elif choice == 2:
+
+            while True:
+
+                print("\n1. Addition")
+                print("2. Subtraction")
+                print("3. Multiplication")
+                print("4. Division")
+                print("5. Back")
 
                 try:
+                    option = int(input("\nEnter your choice: "))
 
-                    rows = int(input("\nEnter number of rows: "))
+                except ValueError:
 
-                    columns = int(input("Enter number of columns: "))
+                    print("\nPlease enter a number.")
+                    continue
 
-                    elements = input(f"\nEnter {rows * columns} elements: ")
+                if option == 1:
+                    analyzer.addition_array()
 
-                    analyzer.create_2d(elements,rows,columns)
+                elif option == 2:
+                    analyzer.subtraction_array()
 
-                except:
+                elif option == 3:
+                    analyzer.multiplication_array()
 
-                    print("\nInvalid input.")
+                elif option == 4:
+                    analyzer.division_array()
 
-            elif option == 3:
+                elif option == 5:
+                    break
+
+                else:
+                    print("\nInvalid choice.")
+
+        elif choice == 3:
+
+            while True:
+
+                print("\n1. Indexing")
+                print("2. Slicing")
+                print("3. Back")
 
                 try:
+                    option = int(input("\nEnter your choice: "))
 
-                    depth = int(input("\nEnter depth: "))
+                except ValueError:
 
-                    rows = int(input("Enter rows: "))
+                    print("\nPlease enter a number.")
+                    continue
 
-                    columns = int(input("Enter columns: "))
+                if option == 1:
+                    analyzer.indexing()
 
-                    elements = input(f"\nEnter {depth * rows * columns} elements: ")
+                elif option == 2:
+                    analyzer.slicing()
 
-                    analyzer.create_3d(elements,depth,rows,columns)
+                elif option == 3:
+                    break
 
-                except:
+                else:
+                    print("\nInvalid choice.")
 
-                    print("\nInvalid input.")
+        elif choice == 4:
 
-            elif option == 4:
+            while True:
 
-                break
+                print("\n1. Combine Array")
+                print("2. Split Array")
+                print("3. Back")
 
-            else:
+                try:
+                    option = int(input("\nEnter your choice: "))
 
-                print("\nInvalid choice.")
+                except ValueError:
 
-    elif choice == 2:
+                    print("\nPlease enter a number.")
+                    continue
 
-        while True:
+                if option == 1:
+                    analyzer.combine_array()
 
-            print("\n1. Addition")
-            print("2. Subtraction")
-            print("3. Multiplication")
-            print("4. Division")
-            print("5. Back")
+                elif option == 2:
+                    analyzer.split_array()
 
-            try:
+                elif option == 3:
+                    break
 
-                option = int(input("\nEnter your choice: "))
+                else:
+                    print("\nInvalid choice.")
 
-            except:
+        elif choice == 5:
 
-                print("\nPlease enter a number.")
-                continue
+            while True:
 
-            if option == 1:
+                print("\n1. Search Array")
+                print("2. Ascending Sort")
+                print("3. Descending Sort")
+                print("4. Filter Array")
+                print("5. Back")
 
-                analyzer.addition_array()
+                try:
+                    option = int(input("\nEnter your choice: "))
 
-            elif option == 2:
+                except ValueError:
 
-                analyzer.subtraction_array()
+                    print("\nPlease enter a number.")
+                    continue
 
-            elif option == 3:
+                if option == 1:
+                    analyzer.search_array()
 
-                analyzer.multiplication_array()
+                elif option == 2:
+                    analyzer.sort_ascending()
 
-            elif option == 4:
+                elif option == 3:
+                    analyzer.sort_descending()
 
-                analyzer.division_array()
+                elif option == 4:
+                    analyzer.filter_array()
 
-            elif option == 5:
+                elif option == 5:
+                    break
 
-                break
+                else:
+                    print("\nInvalid choice.")
 
-            else:
+        elif choice == 6:
 
-                print("\nInvalid choice.")
+            while True:
 
+                print("\n1. Sum")
+                print("2. Mean")
+                print("3. Median")
+                print("4. Maximum")
+                print("5. Minimum")
+                print("6. Standard Deviation")
+                print("7. Variance")
+                print("8. Percentile")
+                print("9. Correlation")
+                print("10. Back")
 
-    elif choice == 3:
+                try:
+                    option = int(input("\nEnter your choice: "))
 
-        while True:
+                except ValueError:
 
-            print("\n1. Indexing")
-            print("2. Slicing")
-            print("3. Back")
+                    print("\nPlease enter a number.")
+                    continue
 
-            try:
+                if option == 1:
+                    analyzer.sum_array()
 
-                option = int(input("\nEnter your choice: "))
+                elif option == 2:
+                    analyzer.mean_array()
 
-            except:
+                elif option == 3:
+                    analyzer.median_array()
 
-                print("\nPlease enter a number.")
-                continue
+                elif option == 4:
+                    analyzer.maximum_array()
 
-            if option == 1:
+                elif option == 5:
+                    analyzer.minimum_array()
 
-                analyzer.indexing()
+                elif option == 6:
+                    analyzer.standard_deviation()
 
-            elif option == 2:
+                elif option == 7:
+                    analyzer.variance()
 
-                analyzer.slicing()
+                elif option == 8:
+                    analyzer.percentile()
 
-            elif option == 3:
+                elif option == 9:
+                    analyzer.correlation()
 
-                break
+                elif option == 10:
+                    break
 
-            else:
+                else:
+                    print("\nInvalid choice.")
 
-                print("\nInvalid choice.")
+        elif choice == 7:
 
-    elif choice == 4:
+            while True:
 
-        while True:
+                print("\n1. Dot Product")
+                print("2. Matrix Multiplication")
+                print("3. Back")
 
-            print("\n1. Combine Array")
-            print("2. Split Array")
-            print("3. Back")
+                try:
+                    option = int(input("\nEnter your choice: "))
 
-            try:
+                except ValueError:
 
-                option = int(input("\nEnter your choice: "))
+                    print("\nPlease enter a number.")
+                    continue
 
-            except:
+                if option == 1:
+                    analyzer.dot_product()
 
-                print("\nPlease enter a number.")
-                continue
+                elif option == 2:
+                    analyzer.matrix_multiplication()
 
-            if option == 1:
+                elif option == 3:
+                    break
 
-                analyzer.combine_array()
+                else:
+                    print("\nInvalid choice.")
 
-            elif option == 2:
+        elif choice == 8:
+            analyzer.show_array()
 
-                analyzer.split_array()
+        elif choice == 9:
+            print("\nThank you for using Array Analyzer!")
+            print("Goodbye!")
+            break
 
-            elif option == 3:
+        else:
+            print("\nInvalid choice. Please try again.")
 
-                break
-
-            else:
-
-                print("\nInvalid choice.")
-
-    elif choice == 5:
-
-        while True:
-
-            print("\n1. Search Array")
-            print("2. Ascending Sort")
-            print("3. Descending Sort")
-            print("4. Filter Array")
-            print("5. Back")
-
-            try:
-
-                option = int(input("\nEnter your choice: "))
-
-            except:
-
-                print("\nPlease enter a number.")
-                continue
-
-            if option == 1:
-
-                analyzer.search_array()
-
-            elif option == 2:
-
-                analyzer.sort_ascending()
-
-            elif option == 3:
-
-                analyzer.sort_descending()
-
-            elif option == 4:
-
-                analyzer.filter_array()
-
-            elif option == 5:
-
-                break
-
-            else:
-
-                print("\nInvalid choice.")
-
-    elif choice == 6:
-
-        while True:
-
-            print("\n1. Sum")
-            print("2. Mean")
-            print("3. Median")
-            print("4. Maximum")
-            print("5. Minimum")
-            print("6. Standard Deviation")
-            print("7. Variance")
-            print("8. Percentile")
-            print("9. Correlation")
-            print("10. Back")
-
-            try:
-
-                option = int(input("\nEnter your choice: "))
-
-            except:
-
-                print("\nPlease enter a number.")
-                continue
-
-            if option == 1:
-
-                analyzer.sum_array()
-
-            elif option == 2:
-
-                analyzer.mean_array()
-
-            elif option == 3:
-
-                analyzer.median_array()
-
-            elif option == 4:
-
-                analyzer.maximum_array()
-
-            elif option == 5:
-
-                analyzer.minimum_array()
-
-            elif option == 6:
-
-                analyzer.standard_deviation()
-
-            elif option == 7:
-
-                analyzer.variance()
-
-            elif option == 8:
-
-                analyzer.percentile()
-
-            elif option == 9:
-
-                analyzer.correlation()
-
-            elif option == 10:
-
-                break
-
-            else:
-
-                print("\nInvalid choice.")
-
-    elif choice == 7:
-
-        while True:
-
-            print("\n1. Dot Product")
-            print("2. Matrix Multiplication")
-            print("3. Back")
-
-            try:
-
-                option = int(input("\nEnter your choice: "))
-
-            except:
-
-                print("\nPlease enter a number.")
-                continue
-
-            if option == 1:
-
-                analyzer.dot_product()
-
-            elif option == 2:
-
-                analyzer.matrix_multiplication()
-
-            elif option == 3:
-
-                break
-
-            else:
-
-                print("\nInvalid choice.")
-
-    elif choice == 8:
-
-        analyzer.show_array()
-
-    elif choice == 9:
-
-        print("\nThank you for using Array Analyzer!")
-        print("Goodbye!")
-
-        break
-
-    else:
-
-        print("\nInvalid choice. Please try again.")
+if __name__ == "__main__":
+    main()
